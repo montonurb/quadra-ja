@@ -1,5 +1,7 @@
 package br.com.quadraja.api.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,9 @@ import lombok.ToString;
 @Table(name = "sports")
 public class Sport {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private boolean active;
     private String name;
+    private LocalDateTime registrationDate;
 }
