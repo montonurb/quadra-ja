@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.quadraja.api.dtos.UserDTO;
+import br.com.quadraja.api.dtos.UserRequest;
 import br.com.quadraja.api.exceptions.UserException;
 import br.com.quadraja.api.models.User;
 import br.com.quadraja.api.repositories.UserRepository;
@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User create(UserDTO userDTO) {
+    public User create(UserRequest userRequest) {
         User user = new User();
-        user.setName(userDTO.name());
-        user.setEmail(userDTO.email());
-        user.setPassword(userDTO.password());
-        user.setRule(userDTO.rule());
+        user.setName(userRequest.name());
+        user.setEmail(userRequest.email());
+        user.setPassword(userRequest.password());
+        user.setRule(userRequest.rule());
         user.setRegistrationDate(LocalDateTime.now());
         user.setActive(true);
         // user.setPassword(encryptPassword(userDTO.password()));
@@ -35,8 +35,9 @@ public class UserService {
         return user;
     }
 
-    public User find(UserDTO userDTO) {
-        List<User> users = userRepository.findByEmailAndPassword(userDTO.email(), userDTO.password());
+    public User find(UserRequest userRequest) {
+        List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
+        // List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), encryptPassword(userRequest.password()));
 
         return users.getFirst();
     }
@@ -45,8 +46,8 @@ public class UserService {
         return userRepository.findAllActive();
     }
 
-    public void disable(UserDTO userDTO) {
-        List<User> users = userRepository.findByEmail(userDTO.email());
+    public void disable(UserRequest userRequest) {
+        List<User> users = userRepository.findByEmail(userRequest.email());
         if (users == null || users.isEmpty()) {
             throw new UserException("Nenhum usuário encontrado com esse e-mail!");
         }

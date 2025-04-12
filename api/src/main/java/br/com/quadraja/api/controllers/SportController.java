@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quadraja.api.dtos.SportDTO;
+import br.com.quadraja.api.dtos.SportRequest;
 import br.com.quadraja.api.exceptions.SportException;
 import br.com.quadraja.api.models.Sport;
 import br.com.quadraja.api.services.SportService;
@@ -25,8 +25,8 @@ public class SportController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Sport> create(@RequestBody SportDTO sportDTO) {
-        return ResponseEntity.ok().body(sportService.create(sportDTO));
+    public ResponseEntity<Sport> create(@RequestBody SportRequest sportRequest) {
+        return ResponseEntity.ok().body(sportService.create(sportRequest));
     }
 
     @GetMapping
@@ -40,8 +40,8 @@ public class SportController {
 
     @PatchMapping
     @Transactional
-    public ResponseEntity disable(@RequestBody SportDTO sportDTO) {
-        sportService.disable(sportDTO);
+    public ResponseEntity<String> disable(@RequestBody SportRequest sportRequest) {
+        sportService.disable(sportRequest);
 
         return ResponseEntity.ok().body("Sport desabilitado com sucesso!");
     }

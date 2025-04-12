@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.quadraja.api.dtos.SportDTO;
+import br.com.quadraja.api.dtos.SportRequest;
 import br.com.quadraja.api.exceptions.SportException;
 import br.com.quadraja.api.models.Sport;
 import br.com.quadraja.api.repositories.SportRepository;
@@ -20,16 +20,16 @@ public class SportService {
         return sportRepository.findAllActive();
     }
 
-    public Sport create(SportDTO sportDTO) {
+    public Sport create(SportRequest sportRequest) {
         Sport sport = new Sport();
-        sport.setName(sportDTO.name());
+        sport.setName(sportRequest.name());
         sport.setRegistrationDate(LocalDateTime.now());
         sport.setActive(true);
 
         return sportRepository.save(sport);
     }
 
-    public void disable(SportDTO sportDTO) {
+    public void disable(SportRequest sportRequest) {
         List<Sport> sports = sportRepository.findAllActive();
         if (sports == null || sports.isEmpty() ) {
             throw new SportException("Nenhum sport encontrado com este nome!");
