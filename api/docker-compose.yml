@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   api:
     image: quadraja
@@ -5,11 +7,21 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    networks:
+      - quadraja-network
+
   db:
     image: postgres:15.10
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: quadra-ja
     ports:
       - "5432:5432"
+    networks:
+      - quadraja-network
+
+networks:
+  quadraja-network:
+    driver: bridge
