@@ -3,6 +3,7 @@ package br.com.quadraja.api.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.quadraja.api.dtos.UserRequest;
 import br.com.quadraja.api.exceptions.UserException;
@@ -15,6 +16,7 @@ public class UserService {
     UserRepository userRepository;
 
     public User create(UserRequest userRequest) {
+        System.out.println("Criando...");
         User user = new User();
         user.setName(userRequest.name());
         user.setEmail(userRequest.email());
@@ -22,22 +24,28 @@ public class UserService {
         user.setRule(userRequest.rule());
         user.setRegistrationDate(LocalDateTime.now());
         user.setActive(true);
-        // user.setPassword(encryptPassword(userDTO.password()));
+        System.out.println("Senha A: " + userRequest);
+        user.setPassword(encryptPassword(userRequest.password()));
+        System.out.println("Senha N:" + user.getPassword());
 
-        List<User> users = userRepository.findByEmail(user.getEmail());
+        List<User> users = userRepository.findUsersByEmail(user.getEmail());
             
         if (users != null && !users.isEmpty()) {
+            System.out.println("1");
             throw new UserException("Já existe um usuário cadastrado com esse e-mail!");
         } else {
+            System.out.println("2");
             userRepository.save(user);
         }
+
+        System.out.println("USER: " + user);
 
         return user;
     }
 
     public User find(UserRequest userRequest) {
-        List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
-        // List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), encryptPassword(userRequest.password()));
+        // List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
+        List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), encryptPassword(userRequest.password()));
 
         return users.getFirst();
     }
@@ -47,7 +55,7 @@ public class UserService {
     }
 
     public void disable(UserRequest userRequest) {
-        List<User> users = userRepository.findByEmail(userRequest.email());
+        List<User> users = userRepository.findUsersByEmail(userRequest.email());
         if (users == null || users.isEmpty()) {
             throw new UserException("Nenhum usuário encontrado com esse e-mail!");
         }
@@ -56,9 +64,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // private String encryptPassword(String password) {
-    //     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private String encryptPassword(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    //     return encoder.encode(password);
-    // }
+        return encoder.encode(password);
+    }
 }

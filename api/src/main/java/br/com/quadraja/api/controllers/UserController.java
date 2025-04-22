@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping
     @Transactional
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest userRequest) {
-
+        System.out.println("Entrou!");
         return ResponseEntity.ok(new UserResponse(userService.create(userRequest)));
     }
 
