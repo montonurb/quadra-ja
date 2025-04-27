@@ -24,30 +24,29 @@ public class UserService {
         user.setRule(userRequest.rule());
         user.setRegistrationDate(LocalDateTime.now());
         user.setActive(true);
-        System.out.println("Senha A: " + userRequest);
         user.setPassword(encryptPassword(userRequest.password()));
-        System.out.println("Senha N:" + user.getPassword());
 
         List<User> users = userRepository.findUsersByEmail(user.getEmail());
             
         if (users != null && !users.isEmpty()) {
-            System.out.println("1");
             throw new UserException("Já existe um usuário cadastrado com esse e-mail!");
         } else {
-            System.out.println("2");
             userRepository.save(user);
         }
-
-        System.out.println("USER: " + user);
 
         return user;
     }
 
     public User find(UserRequest userRequest) {
-        // List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
         List<User> users = userRepository.findByEmailAndPassword(userRequest.email(), encryptPassword(userRequest.password()));
 
         return users.getFirst();
+    }
+
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+
+        return user;
     }
 
     public List<User> findAll() {

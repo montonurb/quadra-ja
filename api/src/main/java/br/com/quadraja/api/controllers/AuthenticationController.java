@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.quadraja.api.dtos.AuthenticationRequest;
+import br.com.quadraja.api.infra.security.TokenJWT;
 import br.com.quadraja.api.models.User;
+import br.com.quadraja.api.services.TokenService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -19,13 +21,17 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager manager;
-
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<User> login(@RequestBody @Valid AuthenticationRequest authenticationRequest) {
-        var token = new UsernamePasswordAuthenticationToken(authenticationRequest.email(), authenticationRequest.password());
-        var authentication = manager.authenticate(token);
-        
-        return ResponseEntity.ok().build();
+    public ResponseEntity<TokenJWT> login(@RequestBody @Valid AuthenticationRequest authenticationRequest) {
+        var authenticationToken = new UsernamePasswordAuthenticationToken(authenticationRequest.email(), authenticationRequest.password());
+        var authentication = manager.authenticate(authenticationToken);
+
+        final String token = tokenService.generateToken((User) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new TokenJWT(token));
+
     }
 }
