@@ -12,9 +12,9 @@ services:
     image: postgres:15.10
     container_name: postgres
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: montonurb
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: quadra-ja
+      POSTGRES_DB: quadraja
     ports:
       - "5432:5432"
     networks:
