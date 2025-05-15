@@ -44,6 +44,7 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
+        System.out.println("buscando user...");
         User user = userRepository.findByEmail(email).orElseThrow();
 
         return user;

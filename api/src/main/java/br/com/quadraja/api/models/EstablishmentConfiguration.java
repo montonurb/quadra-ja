@@ -1,7 +1,8 @@
 package br.com.quadraja.api.models;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,5 +23,5 @@ public class EstablishmentConfiguration {
     private boolean active;
     private LocalTime start;
     private LocalTime finish;
-    private List<Integer> days;
+    private Set<DayOfWeek> days;
 }

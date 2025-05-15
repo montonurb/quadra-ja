@@ -23,6 +23,7 @@ public class EstablishmentConfigurationService {
     public EstablishmentConfiguration createOrSave(EstablishmentConfigurationRequest ecRequest) {
         Optional<EstablishmentConfiguration> es = establishmentConfigurationRepository.find();
         EstablishmentConfiguration newEs;
+
         if (es.isEmpty()) {
             newEs = new EstablishmentConfiguration();
             
@@ -30,7 +31,9 @@ public class EstablishmentConfigurationService {
             newEs = es.get();
         }
 
+
         if (ecRequest != null) {
+            newEs.setActive(true);
             if (ecRequest.daysWeek() != null) {
                 newEs.setDays(ecRequest.daysWeek());
             }
@@ -41,7 +44,6 @@ public class EstablishmentConfigurationService {
                 newEs.setFinish(ecRequest.finish());
             }
         }
-        
         return establishmentConfigurationRepository.save(newEs);
     }
 }
