@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import br.com.quadraja.api.dtos.UserRequest;
+
+import br.com.quadraja.api.dtos.request.UserRequest;
 import br.com.quadraja.api.exceptions.UserException;
 import br.com.quadraja.api.models.User;
 import br.com.quadraja.api.repositories.UserRepository;
@@ -16,7 +17,6 @@ public class UserService {
     UserRepository userRepository;
 
     public User create(UserRequest userRequest) {
-        System.out.println("Criando...");
         User user = new User();
         user.setName(userRequest.name());
         user.setEmail(userRequest.email());
@@ -45,9 +45,7 @@ public class UserService {
 
     public User findByEmail(String email) {
         System.out.println("buscando user...");
-        User user = userRepository.findByEmail(email).orElseThrow();
-
-        return user;
+        return userRepository.findByEmail(email).orElseThrow();
     }
 
     public List<User> findAll() {

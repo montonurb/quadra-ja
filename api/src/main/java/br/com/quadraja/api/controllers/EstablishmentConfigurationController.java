@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quadraja.api.dtos.EstablishmentConfigurationRequest;
+import br.com.quadraja.api.dtos.request.EstablishmentConfigurationRequest;
 import br.com.quadraja.api.exceptions.GenericException;
 import br.com.quadraja.api.models.EstablishmentConfiguration;
 import br.com.quadraja.api.services.EstablishmentConfigurationService;

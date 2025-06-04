@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.quadraja.api.dtos.SportRequest;
+import br.com.quadraja.api.dtos.request.SportRequest;
 import br.com.quadraja.api.exceptions.SportException;
 import br.com.quadraja.api.models.Sport;
 import br.com.quadraja.api.repositories.SportRepository;

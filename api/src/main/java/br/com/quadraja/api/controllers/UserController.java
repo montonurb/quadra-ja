@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quadraja.api.dtos.UserRequest;
-import br.com.quadraja.api.dtos.UserResponse;
+import br.com.quadraja.api.dtos.request.UserRequest;
+import br.com.quadraja.api.dtos.response.UserResponse;
 import br.com.quadraja.api.models.User;
 import br.com.quadraja.api.services.UserService;
 import jakarta.transaction.Transactional;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quadraja.api.dtos.AuthenticationRequest;
+import br.com.quadraja.api.dtos.request.AuthenticationRequest;
 import br.com.quadraja.api.infra.security.TokenJWT;
 import br.com.quadraja.api.models.User;
 import br.com.quadraja.api.services.TokenService;

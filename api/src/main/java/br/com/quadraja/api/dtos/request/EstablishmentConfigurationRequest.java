@@ -1,4 +1,4 @@
-package br.com.quadraja.api.dtos;
+package br.com.quadraja.api.dtos.request;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

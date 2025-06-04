@@ -1,4 +1,4 @@
-package br.com.quadraja.api.dtos;
+package br.com.quadraja.api.dtos.request;
 
 import br.com.quadraja.api.enums.Rule;
 

@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.quadraja.api.dtos.EstablishmentConfigurationRequest;
+import br.com.quadraja.api.dtos.request.EstablishmentConfigurationRequest;
 import br.com.quadraja.api.models.EstablishmentConfiguration;
 import br.com.quadraja.api.repositories.EstablishmentConfigurationRepository;
 

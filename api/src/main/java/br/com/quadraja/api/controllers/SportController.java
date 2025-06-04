@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.quadraja.api.dtos.SportRequest;
+import br.com.quadraja.api.dtos.request.SportRequest;
 import br.com.quadraja.api.exceptions.SportException;
 import br.com.quadraja.api.models.Sport;
 import br.com.quadraja.api.services.SportService;
