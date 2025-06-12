@@ -1,5 +1,6 @@
 package br.com.quadraja.api.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import br.com.quadraja.api.exceptions.CourtException;
@@ -16,7 +17,6 @@ public class CourtService {
     CourtRepository courtRepository;
 
     public Court create(CourtRequest courtRequest) {
-        System.out.println("Criando quadra...");
         Court court = new Court();
         court.setActive(true);
         court.setName(courtRequest.name());
@@ -33,4 +33,7 @@ public class CourtService {
         return court;
     }
 
+    public Court getById(Long id) {
+        return courtRepository.getReferenceById(id);
+    }
 }

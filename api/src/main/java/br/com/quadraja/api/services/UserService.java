@@ -2,6 +2,8 @@ package br.com.quadraja.api.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import br.com.quadraja.api.models.Court;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,7 +46,6 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        System.out.println("buscando user...");
         return userRepository.findByEmail(email).orElseThrow();
     }
 
@@ -66,5 +67,9 @@ public class UserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         return encoder.encode(password);
+    }
+
+    public User findById(Long id) {
+        return userRepository.getReferenceById(id);
     }
 }

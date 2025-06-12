@@ -2,6 +2,7 @@ package br.com.quadraja.api.repositories;
 
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,4 @@ public interface CourtRepository extends JpaRepository<Court, Long> {
 
     @Query("SELECT c FROM Court c WHERE c.active = TRUE AND c.name LIKE :name")
     public List<Court> findAllByName(@Param("name") String name);
-
 }

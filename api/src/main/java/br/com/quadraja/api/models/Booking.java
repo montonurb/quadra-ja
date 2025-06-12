@@ -1,13 +1,8 @@
 package br.com.quadraja.api.models;
 
-import java.time.LocalTime;
-
+import java.time.LocalDateTime;
 import br.com.quadraja.api.enums.Status;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +17,15 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean active;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Status status;
-    private LocalTime registrationDate;
+    private LocalDateTime registrationDate;
+    @ManyToOne
+    private User userReservation;
+    @ManyToOne
+    private User userRegister;
+    @ManyToOne
+    private Court court;
 }
+
