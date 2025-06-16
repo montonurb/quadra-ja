@@ -17,7 +17,7 @@ import br.com.quadraja.api.models.User;
 @Service
 public class TokenService {
 
-    @Value("${api.security.toke.secret}")
+    @Value("${api.security.token.secret}")
     private String secret;
 
     public String generateToken(User user) {
@@ -34,6 +34,7 @@ public class TokenService {
     }
 
     public String getSubject(String tokenJWT) {
+        System.out.println("Token:" + tokenJWT);
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)

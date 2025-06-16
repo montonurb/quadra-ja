@@ -39,6 +39,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     public User userLoggedIn(HttpServletRequest request) {
         var token = recoverTokenJWT(request);
+
+        if (token == null) return null;
+
         String subject = tokenService.getSubject(token);
 
         return userService.findByEmail(subject);
