@@ -2,6 +2,7 @@ package br.com.quadraja.api.controllers;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/sports")
+@SecurityRequirement(name = "bearer-key")
 public class SportController {
     @Autowired
     private SportService sportService;

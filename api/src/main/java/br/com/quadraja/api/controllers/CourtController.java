@@ -3,6 +3,7 @@ package br.com.quadraja.api.controllers;
 import br.com.quadraja.api.dtos.request.CourtRequest;
 import br.com.quadraja.api.dtos.response.CourtResponse;
 import br.com.quadraja.api.services.CourtService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/court")
+@SecurityRequirement(name = "bearer-key")
 public class CourtController {
     @Autowired
     CourtService courtService;
