@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/reservation")
 @SecurityRequirement(name = "bearer-key")
@@ -23,6 +25,11 @@ public class BookingController {
     public ResponseEntity<BookingResponse> create(@RequestBody BookingRequest bookingRequest, @RequestHeader("Authorization") String authorization) {
 
         return ResponseEntity.status(HttpStatus.OK).body(bookingService.create(bookingRequest, authorization.replaceAll("Bearer ", "")));
+    }
+
+    public ResponseEntity<BookingResponse> findFreeTime(LocalDate dayOfTheWeek) {
+        bookingService.getFreeTime(dayOfTheWeek);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }

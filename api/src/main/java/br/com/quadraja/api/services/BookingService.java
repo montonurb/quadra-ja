@@ -13,7 +13,9 @@ import br.com.quadraja.api.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -22,6 +24,8 @@ public class BookingService {
     BookingRepository bookingRepository;
     @Autowired
     SecurityFilter securityFilter;
+    @Autowired
+    EstablishmentConfigurationService establishmentConfigurationService;
     CourtService courtService;
     UserService userService;
 
@@ -96,5 +100,9 @@ public class BookingService {
         List<Booking> bookingList = bookingRepository.isThereTimeAlreadyReserved(startTime, endTime, idCourt);
 
         return bookingList.isEmpty();
+    }
+
+    public void getFreeTime(LocalDate dayOfTheWeek) {
+        //List<>
     }
 }

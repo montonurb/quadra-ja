@@ -24,4 +24,5 @@ public class EstablishmentConfiguration {
     private LocalTime start;
     private LocalTime finish;
     private Set<DayOfWeek> days;
+    private boolean available;
 }
